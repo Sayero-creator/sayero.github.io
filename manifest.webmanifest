@@ -1,0 +1,17 @@
+{
+  "name": "Карточный клуб",
+  "short_name": "Карточный клуб",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0c211e",
+  "theme_color": "#102f2a",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

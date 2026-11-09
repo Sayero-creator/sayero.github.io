@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#102f2a">
+  <meta name="description" content="Карточный клуб — Дурак, Косынка и Свободная ячейка">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Карточный клуб</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" id="homeBtn" aria-label="На главную"><span class="brand-mark">♠</span><span>КАРТОЧНЫЙ <b>КЛУБ</b></span></button>
+      <div class="top-actions">
+        <button class="icon-btn" id="soundBtn" aria-label="Звук">♫</button>
+        <button class="icon-btn" id="helpBtn" aria-label="Помощь">?</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="lobby" class="screen active">
+        <div class="hero">
+          <div class="eyebrow"><span class="live-dot"></span> ВАШ ЛИЧНЫЙ ИГРОВОЙ СТОЛ</div>
+          <h1>Время<br><em>сыграть.</em></h1>
+          <p class="hero-copy">Три классические игры. Умные соперники. Ваш следующий ход.</p>
+          <div class="hero-ornament" aria-hidden="true"><span>♠</span><span>♥</span><span>♦</span><span>♣</span></div>
+        </div>
+        <div class="section-head"><div><div class="eyebrow">КОЛЛЕКЦИЯ</div><h2>Выберите игру</h2></div><span class="muted small">03 режима</span></div>
+        <div class="game-grid">
+          <button class="game-card durak-card" data-game="durak">
+            <div class="card-art"><span class="playing-card red-card">♥<small>9</small></span><span class="playing-card dark-card">♠<small>A</small></span><span class="art-spark">✦</span></div>
+            <div class="game-card-foot"><div><span class="game-tag">СОПЕРНИКИ</span><h3>Дурак</h3><p>Подкидной · 2–4 бота</p></div><span class="arrow">↗</span></div>
+          </button>
+          <button class="game-card solitaire-card" data-game="klondike">
+            <div class="card-art"><span class="playing-card dark-card">♣<small>K</small></span><span class="playing-card red-card">♦<small>Q</small></span><span class="art-spark">✦</span></div>
+            <div class="game-card-foot"><div><span class="game-tag">КЛАССИКА</span><h3>Косынка</h3><p>Семь столбцов · 1 карта</p></div><span class="arrow">↗</span></div>
+          </button>
+          <button class="game-card freecell-card" data-game="freecell">
+            <div class="card-art"><span class="playing-card red-card">♥<small>J</small></span><span class="playing-card dark-card">♠<small>10</small></span><span class="art-spark">✦</span></div>
+            <div class="game-card-foot"><div><span class="game-tag">СТРАТЕГИЯ</span><h3>Свободная ячейка</h3><p>4 ячейки · открытая колода</p></div><span class="arrow">↗</span></div>
+          </button>
+        </div>
+        <div class="bottom-note"><span>✧</span> Хорошая партия начинается с хорошего настроения.</div>
+      </section>
+
+      <section id="setup" class="screen">
+        <button class="back-link" id="setupBack">← Все игры</button>
+        <div class="setup-wrap">
+          <div class="eyebrow">НОВАЯ ПАРТИЯ</div><h1 id="setupTitle">Дурак</h1>
+          <p class="muted" id="setupDesc">Проверьте стратегию против соперников.</p>
+          <div class="setup-panel">
+            <div class="field-label">КОЛИЧЕСТВО СОПЕРНИКОВ</div>
+            <div class="choice-row" id="botChoices">
+              <button class="choice" data-bots="2">2</button><button class="choice selected" data-bots="3">3</button><button class="choice" data-bots="4">4</button>
+            </div>
+            <div class="field-label">СЛОЖНОСТЬ БОТОВ</div>
+            <div class="choice-row difficulty">
+              <button class="choice" data-level="easy">Новичок</button><button class="choice selected" data-level="normal">Тактик</button><button class="choice" data-level="hard">Мастер</button>
+            </div>
+            <div class="setup-hint" id="setupHint">Тактик — сбалансированная игра с разумными решениями.</div>
+            <button class="primary-btn" id="startBtn">Начать партию <span>→</span></button>
+          </div>
+          <p class="tiny muted">В пасьянсах количество соперников не используется.</p>
+        </div>
+      </section>
+
+      <section id="tableScreen" class="screen">
+        <div class="table-toolbar">
+          <button class="back-link" id="leaveGame">← В меню</button>
+          <div class="table-title"><span class="eyebrow" id="modeEyebrow">ИГРА</span><h2 id="tableTitle">Дурак</h2></div>
+          <button class="small-btn" id="restartBtn">↻ <span>Заново</span></button>
+        </div>
+        <div class="game-status" id="gameStatus">Ваш ход</div>
+        <div id="gameBoard" class="game-board"></div>
+        <div class="game-controls" id="gameControls"></div>
+        <div class="table-footer"><span id="deckInfo">Колодa · 36 карт</span><button class="text-btn" id="hintBtn">✧ Подсказка</button></div>
+      </section>
+    </main>
+    <footer class="footer"><span>КАРТОЧНЫЙ КЛУБ</span><span>ИГРАЙТЕ С УДОВОЛЬСТВИЕМ · 2026</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">×</button>
+      <div class="eyebrow" id="modalEyebrow">КАК ИГРАТЬ</div>
+      <h2 id="modalTitle">Добро пожаловать</h2>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions"><button class="secondary-btn" id="modalPrev">Назад</button><button class="primary-btn" id="modalNext">Далее <span>→</span></button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
